@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 
-from CoC.utils.coc_api import get_players
+from CoC.utils import sync
 
 
 def index(request):
-
-    return HttpResponse(get_players())
+    sync.players()
+    return HttpResponse("all players imported")
