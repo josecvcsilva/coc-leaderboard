@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+from zipapp import MAIN_TEMPLATE
+
 import environ
 from pathlib import Path
 
@@ -32,6 +34,7 @@ ALLOWED_HOSTS = ['local.coc.com']
 
 INSTALLED_APPS = [
     'players.apps.PlayersConfig',
+    'wars.apps.WarsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,4 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 env = environ.Env()
 environ.Env.read_env()
 COC_API_KEY = env('COC_API_KEY')
-PORTUGAL_1128_CLAN_TAG = env('PORTUGAL_1128_CLAN_TAG')
+MAIN_CLAN_TAG = env('MAIN_CLAN_TAG')
