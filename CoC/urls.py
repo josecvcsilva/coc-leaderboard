@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-import players.views
+import leaderboard.views
 import wars.views
 urlpatterns = [
+    path('', leaderboard.views.index, name='index'),
     path('admin/', admin.site.urls),
-    path('players/', players.views.index),
     path('wars/', wars.views.index),
+
+
 ]

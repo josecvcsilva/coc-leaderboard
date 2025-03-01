@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import os
 from zipapp import MAIN_TEMPLATE
 
 import environ
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = ['local.coc.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'leaderboard.apps.LeaderboardConfig',
     'players.apps.PlayersConfig',
     'wars.apps.WarsConfig',
     'django.contrib.admin',
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'CoC.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
