@@ -18,11 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 import leaderboard.views
-import wars.views
 urlpatterns = [
     path('', leaderboard.views.index, name='index'),
     path('admin/', admin.site.urls),
-    path('wars/', wars.views.index),
-
-
 ]
