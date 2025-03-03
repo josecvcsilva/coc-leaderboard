@@ -23,4 +23,5 @@ class War_player_attack(models.Model):
     stars = models.IntegerField()
     destruction = models.IntegerField()
     opponent_tag = models.CharField(max_length=20)
+    opponent_name = models.CharField(max_length=100)
     order = models.IntegerField()

@@ -66,7 +66,7 @@
                                             {% for attack in player.attacks %}
                                                 <tr>
                                                     <th>{{ forloop.counter }}</th>
-                                                    <td>{{ attack.defender_tag }}</td>
+                                                    <td>{{ attack.defender_name }}</td>
                                                     <td>{{ attack.defender_town_hall_level }}</td>
                                                     <td>{{ attack.destruction }}</td>
                                                     <td>{{ attack.stars }}</td>
@@ -79,54 +79,6 @@
                                 </td>
                             </tr>
                         {% endfor %}
-
-                        {#						    <tr data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">#}
-                        {#						      <th scope="row">2</th>#}
-                        {#						      <td>Laptop Technology AS2020</td>#}
-                        {#						      <td>$200.00</td>#}
-                        {#						      <td>2</td>#}
-                        {#						      <td>$400.00</td>#}
-                        {#						      <td>#}
-                        {#						      	<i class="fa" aria-hidden="false"></i>#}
-                        {#				        	</td>#}
-                        {#						    </tr>#}
-                        {#								<tr>#}
-                        {#						    	<td colspan="6" id="collapseTwo" class="collapse acc" data-parent="#accordion">#}
-                        {#						    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro iste, facere sunt sequi nostrum ipsa, amet doloremque magnam reiciendis tempore sapiente. Necessitatibus recusandae harum nam sit perferendis quia inventore natus.</p>#}
-                        {#						    	</td>#}
-                        {#						    </tr>#}
-                        {##}
-                        {#						    <tr data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">#}
-                        {#						      <th scope="row">3</th>#}
-                        {#						      <td>Laptop Technology AS2020</td>#}
-                        {#						      <td>$200.00</td>#}
-                        {#						      <td>2</td>#}
-                        {#						      <td>$400.00</td>#}
-                        {#						      <td>#}
-                        {#						      	<i class="fa" aria-hidden="false"></i>#}
-                        {#				        	</td>#}
-                        {#						    </tr>#}
-                        {#								<tr>#}
-                        {#						    	<td colspan="6" id="collapseThree" class="collapse acc" data-parent="#accordion">#}
-                        {#						    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro iste, facere sunt sequi nostrum ipsa, amet doloremque magnam reiciendis tempore sapiente. Necessitatibus recusandae harum nam sit perferendis quia inventore natus.</p>#}
-                        {#						    	</td>#}
-                        {#						    </tr>#}
-                        {##}
-                        {#						    <tr data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="collapsed">#}
-                        {#						      <th scope="row">4</th>#}
-                        {#						      <td>Laptop Technology AS2020</td>#}
-                        {#						      <td>$200.00</td>#}
-                        {#						      <td>2</td>#}
-                        {#						      <td>$400.00</td>#}
-                        {#						      <td>#}
-                        {#						      	<i class="fa" aria-hidden="false"></i>#}
-                        {#				        	</td>#}
-                        {#						    </tr>#}
-                        {#								<tr>#}
-                        {#						    	<td colspan="6" id="collapseFour" class="collapse acc" data-parent="#accordion">#}
-                        {#						    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro iste, facere sunt sequi nostrum ipsa, amet doloremque magnam reiciendis tempore sapiente. Necessitatibus recusandae harum nam sit perferendis quia inventore natus.</p>#}
-                        {#						    	</td>#}
-                        {#						    </tr>#}
                         </tbody>
                     </table>
                 </div>

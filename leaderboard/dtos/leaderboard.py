@@ -43,7 +43,7 @@ class LeaderboardDto:
                         "stars": attack.stars,
                         "destruction": attack.destruction,
                         "bonus_stars": bonus_stars,
-                        "defender_tag": attack.opponent_tag,
+                        "defender_name": attack.opponent_name,
                         "defender_town_hall_level": attack.defender_town_hall_level,
                     })
         players_data = sorted(players_data, key=lambda x: x['total_stars'], reverse=True)
