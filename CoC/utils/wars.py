@@ -20,13 +20,14 @@ def create_war_player(player: Player, war: War, town_hall_level) -> War_player:
     new_war_player.save()
     return new_war_player
 
-def create_war_player_attack(war_player: War_player, defender_town_hall_level, stars, destruction, opponent_tag, order) -> War_player_attack:
+def create_war_player_attack(war_player: War_player, defender_town_hall_level, stars, destruction, opponent_tag, opponent_name, order) -> War_player_attack:
     war_player_attack = War_player_attack()
     war_player_attack.war_player_id = war_player
     war_player_attack.defender_town_hall_level = defender_town_hall_level
     war_player_attack.stars = stars
     war_player_attack.destruction = destruction
     war_player_attack.opponent_tag = opponent_tag
+    war_player_attack.opponent_name = opponent_name
     war_player_attack.order = order
     war_player_attack.save()
     return war_player_attack

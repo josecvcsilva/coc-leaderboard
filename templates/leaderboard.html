@@ -1,10 +1,143 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Leaderboard | Portugal 1128</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-4">
+                <h2 class="heading-section">Ranking Portugal 1128</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table myaccordion table-hover" id="accordion">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Jogador</th>
+                                <th>TH</th>
+                                <th># Ataques</th>
+                                <th># Estrelas</th>
+                                <th>Total Percentagem</th>
+                                <th>Bonus</th>
+                                <th>Total</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in players %}
+                            <tr data-toggle="collapse" data-target="#collapse-{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse-{{ forloop.counter }}" class="collapsed">
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ player.name }}</td>
+                                <td>{{ player.town_hall_level }}</td>
+                                <td>{{ player.attacks|length }} / {{ max_attacks }}</td>
+                                <td>{{ player.stars }}</td>
+                                <td>{{ player.total_destruction }} %</td>
+                                <td>{{ player.total_bonus_stars }}</td>
+                                <td>{{ player.total_stars}}</td>
+                                <td><i class="fa" aria-hidden="false"></i></td>
+                            </tr>
+                            <tr>
+                               <td colspan="9" id="collapse-{{ forloop.counter }}" class="collapse acc" data-parent="#accordion">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Adversário</th>
+                                                <th>TH</th>
+                                                <th>%</th>
+                                                <th># Estrelas</th>
+                                                <th>Bonus</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for attack in player.attacks %}
+                                                <tr>
+                                                    <th>{{ forloop.counter }}</th>
+                                                    <td>{{ attack.defender_tag }}</td>
+                                                    <td>{{ attack.defender_town_hall_level }}</td>
+                                                    <td>{{ attack.destruction }}</td>
+                                                    <td>{{ attack.stars }}</td>
+                                                    <td>{{ attack.bonus_stars }}</td>
+                                                    <td>{{ attack.stars|add:attack.bonus_stars }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
+                        {#						    <tr data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">#}
+                        {#						      <th scope="row">2</th>#}
+                        {#						      <td>Laptop Technology AS2020</td>#}
+                        {#						      <td>$200.00</td>#}
+                        {#						      <td>2</td>#}
+                        {#						      <td>$400.00</td>#}
+                        {#						      <td>#}
+                        {#						      	<i class="fa" aria-hidden="false"></i>#}
+                        {#				        	</td>#}
+                        {#						    </tr>#}
+                        {#								<tr>#}
+                        {#						    	<td colspan="6" id="collapseTwo" class="collapse acc" data-parent="#accordion">#}
+                        {#						    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro iste, facere sunt sequi nostrum ipsa, amet doloremque magnam reiciendis tempore sapiente. Necessitatibus recusandae harum nam sit perferendis quia inventore natus.</p>#}
+                        {#						    	</td>#}
+                        {#						    </tr>#}
+                        {##}
+                        {#						    <tr data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">#}
+                        {#						      <th scope="row">3</th>#}
+                        {#						      <td>Laptop Technology AS2020</td>#}
+                        {#						      <td>$200.00</td>#}
+                        {#						      <td>2</td>#}
+                        {#						      <td>$400.00</td>#}
+                        {#						      <td>#}
+                        {#						      	<i class="fa" aria-hidden="false"></i>#}
+                        {#				        	</td>#}
+                        {#						    </tr>#}
+                        {#								<tr>#}
+                        {#						    	<td colspan="6" id="collapseThree" class="collapse acc" data-parent="#accordion">#}
+                        {#						    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro iste, facere sunt sequi nostrum ipsa, amet doloremque magnam reiciendis tempore sapiente. Necessitatibus recusandae harum nam sit perferendis quia inventore natus.</p>#}
+                        {#						    	</td>#}
+                        {#						    </tr>#}
+                        {##}
+                        {#						    <tr data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="collapsed">#}
+                        {#						      <th scope="row">4</th>#}
+                        {#						      <td>Laptop Technology AS2020</td>#}
+                        {#						      <td>$200.00</td>#}
+                        {#						      <td>2</td>#}
+                        {#						      <td>$400.00</td>#}
+                        {#						      <td>#}
+                        {#						      	<i class="fa" aria-hidden="false"></i>#}
+                        {#				        	</td>#}
+                        {#						    </tr>#}
+                        {#								<tr>#}
+                        {#						    	<td colspan="6" id="collapseFour" class="collapse acc" data-parent="#accordion">#}
+                        {#						    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro iste, facere sunt sequi nostrum ipsa, amet doloremque magnam reiciendis tempore sapiente. Necessitatibus recusandae harum nam sit perferendis quia inventore natus.</p>#}
+                        {#						    	</td>#}
+                        {#						    </tr>#}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
+
