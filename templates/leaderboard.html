@@ -19,6 +19,24 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-3">
+                <label class="select" for="slct">
+                    <select id="slct" required="required">
+                        <option value="" {% if "?date" not in request.get_full_path %} selected='selected' {% endif %}>Mês Actual</option>
+                        {% for war_date in war_dates %}
+                            <option value="{{ war_date }}" {% if war_date in request.get_full_path %} selected='selected' {% endif %}>{{ war_date }}</option>
+                        {% endfor %}
+                    </select>
+                    <svg>
+                        <use xlink:href="#select-arrow-down"></use>
+                    </svg>
+                </label>
+                <svg class="sprites">
+                <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                    <polyline points="1 1 5 5 9 1"></polyline>
+                </symbol>
+                </svg>
+            </div>
             <div class="col-md-12">
                 <div class="table-wrap">
                     <table class="table myaccordion table-hover" id="accordion">
@@ -28,7 +46,7 @@
                                 <th>Jogador</th>
                                 <th>TH</th>
                                 <th># Ataques</th>
-                                <th># Estrelas</th>
+                                <th>Estrelas <i class="fa fa-star" aria-hidden="true"></i></th>
                                 <th>Total Percentagem</th>
                                 <th>Bonus</th>
                                 <th>Total</th>
@@ -42,11 +60,11 @@
                                 <td>{{ player.name }}</td>
                                 <td>{{ player.town_hall_level }}</td>
                                 <td>{{ player.attacks|length }} / {{ max_attacks }}</td>
-                                <td>{{ player.stars }}</td>
+                                <td>{{ player.stars }} <i class="fa fa-star" aria-hidden="true"></i></td>
                                 <td>{{ player.total_destruction }} %</td>
-                                <td>{{ player.total_bonus_stars }}</td>
-                                <td>{{ player.total_stars}}</td>
-                                <td><i class="fa" aria-hidden="false"></i></td>
+                                <td>{{ player.total_bonus_stars }} <i class="fa fa-star" aria-hidden="true"></i></td>
+                                <td>{{ player.total_stars}} <i class="fa fa-star" aria-hidden="true"></i></td>
+                                <td><i class="fa fa-arrow" aria-hidden="false"></i></td>
                             </tr>
                             <tr>
                                <td colspan="9" id="collapse-{{ forloop.counter }}" class="collapse acc" data-parent="#accordion">
@@ -69,9 +87,9 @@
                                                     <td>{{ attack.defender_name }}</td>
                                                     <td>{{ attack.defender_town_hall_level }}</td>
                                                     <td>{{ attack.destruction }}</td>
-                                                    <td>{{ attack.stars }}</td>
-                                                    <td>{{ attack.bonus_stars }}</td>
-                                                    <td>{{ attack.stars|add:attack.bonus_stars }}</td>
+                                                    <td>{{ attack.stars }} <i class="fa fa-star" aria-hidden="true"></i></td>
+                                                    <td>{{ attack.bonus_stars }} <i class="fa fa-star" aria-hidden="true"></i></td>
+                                                    <td>{{ attack.stars|add:attack.bonus_stars }} <i class="fa fa-star" aria-hidden="true"></i></td>
                                                 </tr>
                                             {% endfor %}
                                         </tbody>
