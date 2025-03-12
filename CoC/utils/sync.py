@@ -7,7 +7,6 @@ from datetime import datetime
 
 from wars.models import War
 
-
 def players(clan_tag: str = MAIN_CLAN_TAG):
     response_players = get_players(clan_tag)
 

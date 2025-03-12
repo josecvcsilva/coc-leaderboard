@@ -14,15 +14,15 @@ def create_war(opponent_clan_tag: str, clan_name: str, start_time: datetime) -> 
 
 def create_war_player(player: Player, war: War, town_hall_level) -> War_player:
     new_war_player = War_player()
-    new_war_player.player_id = player
-    new_war_player.war_id = war
+    new_war_player.player_id = player.id
+    new_war_player.war_id = war.id
     new_war_player.town_hall_level = town_hall_level
     new_war_player.save()
     return new_war_player
 
 def create_war_player_attack(war_player: War_player, defender_town_hall_level, stars, destruction, opponent_tag, opponent_name, order) -> War_player_attack:
     war_player_attack = War_player_attack()
-    war_player_attack.war_player_id = war_player
+    war_player_attack.war_player_id = war_player.id
     war_player_attack.defender_town_hall_level = defender_town_hall_level
     war_player_attack.stars = stars
     war_player_attack.destruction = destruction

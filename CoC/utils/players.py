@@ -24,4 +24,4 @@ def find_or_create_player_by_tag(tag: str) -> Player:
         player = get_player(player_tag=tag).json()
         clan_tag = player["clan"]["tag"] if "clan" in player else ""
         return create_player(player["name"], tag, player["townHallLevel"], clan_tag)
-    return Player.objects.get(tag=tag)
+    return Player.objects.filter(tag=tag).first()
