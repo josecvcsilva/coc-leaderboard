@@ -46,5 +46,5 @@ class LeaderboardDto:
                         "defender_name": attack.opponent_name,
                         "defender_town_hall_level": attack.defender_town_hall_level,
                     })
-        players_data = sorted(players_data, key=lambda x: x['total_stars'], reverse=True)
+        players_data = sorted(players_data, key=lambda x: (x['total_stars'], x['total_destruction']), reverse=True)
         return {"players": players_data, "max_attacks": len(self.wars) * 2}
