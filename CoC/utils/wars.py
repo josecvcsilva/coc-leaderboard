@@ -4,11 +4,16 @@ from players.models import Player
 from wars.models import War, War_player, War_player_attack
 
 
-def create_war(opponent_clan_tag: str, clan_name: str, start_time: datetime) -> War:
-    new_war = War()
+def create_or_update_war(opponent_clan_tag: str, clan_name: str, start_time: datetime, state: str) -> War:
+    war = War.objects.filter(start_time=start_time, opponent_clan_name__exact=opponent_clan_tag)
+    if war.exists():
+        new_war = war.first()
+    else:
+        new_war = War()
     new_war.opponent_clan_tag = opponent_clan_tag
     new_war.opponent_clan_name = clan_name
     new_war.start_time = start_time
+    new_war.state = state
     new_war.save()
     return new_war
 

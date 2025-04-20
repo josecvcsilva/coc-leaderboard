@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 col-sm-12">
                 <label class="select" for="slct">
                     <select id="slct" required="required">
                         <option value="" {% if "?date" not in request.get_full_path %} selected='selected' {% endif %}>Mês Actual</option>
@@ -36,6 +36,17 @@
                     <polyline points="1 1 5 5 9 1"></polyline>
                 </symbol>
                 </svg>
+            </div>
+            <div class="offset-lg-6 col-lg-3 col-md-6 col-sm-12">
+                {% if last_war.state == "inWar" %}
+                    <div class="alert alert-danger">
+                        Guerra em progresso <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    </div>
+                {% else %}
+                    <div class="alert alert-success">
+                        Dados actualizados <i class="fa fa-check" aria-hidden="true"></i>
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-12">
                 <div class="table-wrap">

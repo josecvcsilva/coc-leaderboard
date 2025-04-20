@@ -8,6 +8,7 @@ class War(models.Model):
     opponent_clan_tag = models.CharField(max_length=20)
     opponent_clan_name = models.CharField(max_length=100)
     start_time = models.DateTimeField()
+    state = models.CharField(max_length=20, default="warEnded")
 
 
 class War_player(models.Model):

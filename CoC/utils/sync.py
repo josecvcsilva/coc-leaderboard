@@ -1,6 +1,6 @@
 from CoC.settings import MAIN_CLAN_TAG
 from CoC.utils.coc_api import get_players, get_current_war
-from CoC.utils.wars import create_war, create_war_player, create_war_player_attack
+from CoC.utils.wars import create_or_update_war, create_war_player, create_war_player_attack
 from players.models import Player
 from CoC.utils.players import create_player, update_player, find_or_create_player_by_tag
 from datetime import datetime
@@ -26,21 +26,28 @@ def current_war(clan_tag: str = MAIN_CLAN_TAG):
         start_time = datetime.strptime(war_data["preparationStartTime"], date_format)
 
         # if this war already exist, don't create it again
-        if War.objects.filter(start_time=start_time).exists():
+        if War.objects.filter(start_time=start_time, state__exact='warEnded').exists():
             return
 
         # we only want to save ended wars with no battle modifier
-        if war_data["state"] == "warEnded" and war_data["battleModifier"] == "none":
-            opponent_clan_tag = war_data["opponent"]["tag"]
+        if war_data["battleModifier"] == "none":
+            if war_data["state"] == "warEnded":
+                opponent_clan_tag = war_data["opponent"]["tag"]
 
-            #sync opponents players
-            players(opponent_clan_tag)
-            curr_war = create_war(opponent_clan_tag, war_data["opponent"]["name"], start_time)
+                #sync opponents players
+                players(opponent_clan_tag)
+                curr_war = create_or_update_war(opponent_clan_tag, war_data["opponent"]["name"], start_time, war_data["state"])
 
-            for attacker in war_data["clan"]["members"]:
-                clan_player = find_or_create_player_by_tag(attacker["tag"])
-                war_player = create_war_player(clan_player, curr_war, attacker["townhallLevel"])
-                if "attacks" in attacker:
-                    for attack in attacker["attacks"]:
-                        opponent_player = find_or_create_player_by_tag(attack["defenderTag"])
-                        create_war_player_attack(war_player, opponent_player.town_hall_level, attack["stars"], attack["destructionPercentage"], attack["defenderTag"],opponent_player.name, attack["order"])
+                for attacker in war_data["clan"]["members"]:
+                    clan_player = find_or_create_player_by_tag(attacker["tag"])
+                    war_player = create_war_player(clan_player, curr_war, attacker["townhallLevel"])
+                    if "attacks" in attacker:
+                        for attack in attacker["attacks"]:
+                            opponent_player = find_or_create_player_by_tag(attack["defenderTag"])
+                            create_war_player_attack(war_player, opponent_player.town_hall_level, attack["stars"], attack["destructionPercentage"], attack["defenderTag"],opponent_player.name, attack["order"])
+            elif(war_data["state"] == "inWar"):
+                # if this war already exist, don't create it again
+                if War.objects.filter(start_time=start_time, state__exact='inWar').exists():
+                    return
+                # if war is in progress, we need to update the war data
+                create_or_update_war(war_data["opponent"]["tag"], war_data["opponent"]["name"], start_time, war_data["state"])

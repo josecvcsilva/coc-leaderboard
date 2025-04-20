@@ -18,6 +18,7 @@ def index(request):
     leaderboard = LeaderboardDto(War.objects.filter(start_time__month__gte=date_filter.month))
     data = leaderboard.to_dict()
     data['war_dates'] = _get_filter_dates()
+    data['last_war'] = War.objects.order_by('-start_time').first()
 
     return render(request, 'leaderboard.html', data)
 
