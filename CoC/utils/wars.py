@@ -5,7 +5,7 @@ from wars.models import War, War_player, War_player_attack
 
 
 def create_or_update_war(opponent_clan_tag: str, clan_name: str, start_time: datetime, state: str) -> War:
-    war = War.objects.filter(start_time=start_time, opponent_clan_name__exact=opponent_clan_tag)
+    war = War.objects.filter(start_time=start_time, state__exact='inWar')
     if war.exists():
         new_war = war.first()
     else:
