@@ -13,7 +13,7 @@ def index(request):
     current_war()
 
     date_filter = request.GET.get('date')
-    date_filter = datetime.strptime(date_filter,'%Y-%M') if date_filter else date.today()
+    date_filter = datetime.strptime(date_filter,'%Y-%m') if date_filter else date.today()
 
     leaderboard = LeaderboardDto(War.objects.filter(start_time__month__gte=date_filter.month))
     data = leaderboard.to_dict()
