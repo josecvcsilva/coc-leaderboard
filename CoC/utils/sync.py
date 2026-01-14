@@ -45,7 +45,7 @@ def current_war(clan_tag: str = MAIN_CLAN_TAG):
                         for attack in attacker["attacks"]:
                             opponent_player = find_or_create_player_by_tag(attack["defenderTag"])
                             create_war_player_attack(war_player, opponent_player.town_hall_level, attack["stars"], attack["destructionPercentage"], attack["defenderTag"],opponent_player.name, attack["order"])
-            elif(war_data["state"] == "inWar"):
+            elif war_data["state"] == "inWar":
                 # if this war already exist, don't create it again
                 if War.objects.filter(start_time=start_time, state__exact='inWar').exists():
                     return

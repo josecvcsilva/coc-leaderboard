@@ -14,8 +14,7 @@ def index(request):
 
     date_filter = request.GET.get('date')
     date_filter = datetime.strptime(date_filter,'%Y-%m') if date_filter else date.today()
-
-    leaderboard = LeaderboardDto(War.objects.filter(start_time__month__gte=date_filter.month))
+    leaderboard = LeaderboardDto(War.objects.filter(start_time__month__gte=date_filter.month, start_time__year=date_filter.year))
     data = leaderboard.to_dict()
     data['war_dates'] = _get_filter_dates()
     data['last_war'] = War.objects.order_by('-start_time').first()
@@ -25,7 +24,7 @@ def index(request):
 # Get distinct dates from Wars and return Month and Year
 # Exclude current month from the list
 def _get_filter_dates():
-    dates = War.objects.all().values("start_time")
+    dates = War.objects.all().order_by("-start_time").values("start_time")
     current_month = datetime.today().strftime('%Y-%m')
     war_dates = []
     for war_date in dates:
